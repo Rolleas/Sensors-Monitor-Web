@@ -1,0 +1,79 @@
+<div class="center-screen">
+  <div>
+    <div class="search">
+      <input class="input" placeholder="Search" [(ngModel)]="keyword" pInputText />
+      <p-button label="Search" (click)="onSearch()"></p-button>
+    </div>
+
+    <p-table
+      [value]="(sensors | async)?.data"
+      [paginator]="true"
+      [rows]="4"
+      [showCurrentPageReport]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      currentPageReportTemplate="Total {{ total }}"
+      [totalRecords]="(sensors | async)?.totalContent"
+      [lazy]="true"
+      (onLazyLoad)="onLazyLoad($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Model</th>
+          <th>Type</th>
+          <th>Range</th>
+          <th>Unit</th>
+          <th>Location</th>
+          <th *ngIf="(role | async) === 'admin'"></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-sensor>
+        <tr>
+          <td [pTooltip]="sensor.description" tooltipPosition="top">{{ sensor.name }}</td>
+          <td>{{ sensor.model }}</td>
+          <td>{{ sensor.type.value }}</td>
+          <td>{{ sensor.rangeFrom }} - {{ sensor.rangeTo }}</td>
+          <td>{{ sensor.unit.value }}</td>
+          <td>{{ sensor.location }}</td>
+          <td *ngIf="(role | async) === 'admin'">
+            <div class="flex align-items-center justify-content-center gap-2">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-pencil"
+                (click)="onRowEdit(sensor)"
+                class="p-button-rounded p-button-text p-button-success mr-2"
+              ></button>
+              <button
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                (click)="onRowDelete(sensor)"
+                class="p-button-rounded p-button-text p-button-danger"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="paginatorleft">
+        <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+      </ng-template>
+
+      <ng-template pTemplate="paginatorright">
+        <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+      </ng-template>
+    </p-table>
+
+    <p-button *ngIf="(role | async) === 'admin'" type="button" label="Add Sensor" (click)="showDialog()"></p-button>
+  </div>
+</div>
+
+<app-add-modal
+  [display]="display"
+  [data]="selectedValue"
+  [attributes]="attributes | async"
+  (onCancelEvent)="onCancel()"
+  (onOnSubmit)="onSubmit()"
+></app-add-modal>

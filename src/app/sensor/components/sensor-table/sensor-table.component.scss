@@ -1,0 +1,15 @@
+.center-screen {
+  .search {
+    display: flex;
+    margin-bottom: 10px;
+
+    input {
+      margin-right: 5px;
+    }
+  }
+}
+
+::ng-deep .p-paginator-right-content .ng-star-inserted,
+::ng-deep .p-paginator-left-content .ng-star-inserted {
+  display: none;
+}

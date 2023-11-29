@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  input,
+  select,
+  textarea {
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  .range-block {
+    .input:first-child {
+      margin-right: 5px;
+    }
+  }
+
+  p-dropdown {
+    margin-bottom: 10px;
+
+    ::ng-deep .p-dropdown {
+      width: 100%;
+    }
+  }
+
+  .btn-group {
+    display: flex;
+    justify-content: space-between;
+  }
+}

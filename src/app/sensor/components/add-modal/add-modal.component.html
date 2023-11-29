@@ -1,0 +1,56 @@
+<p-dialog
+  class="add-dialog"
+  header="Add / Edit"
+  [(visible)]="display"
+  [maximizable]="false"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="cancel()"
+>
+  <form class="form" (ngSubmit)="submit()" [formGroup]="addForm">
+    <input class="input" placeholder="Name" formControlName="name" pInputText />
+    <input class="input" placeholder="Model" formControlName="model" pInputText type="text" />
+
+    <div class="range-block">
+      <input
+        class="input"
+        placeholder="Range from"
+        formControlName="rangeFrom"
+        pInputText
+        type="number"
+        oninput="this.value=(parseInt(this.value)||0)"
+      />
+      <input
+        class="input"
+        placeholder="Range to"
+        formControlName="rangeTo"
+        pInputText
+        type="number"
+        oninput="this.value=(parseInt(this.value)||0)"
+      />
+    </div>
+
+    <p-dropdown
+      [options]="attributes?.types"
+      optionLabel="value"
+      formControlName="type"
+      [showClear]="true"
+      placeholder="Type"
+    ></p-dropdown>
+    <p-dropdown
+      [options]="attributes?.units"
+      optionLabel="value"
+      formControlName="unit"
+      [showClear]="true"
+      placeholder="Unit"
+    ></p-dropdown>
+
+    <input class="input" placeholder="Location" formControlName="location" pInputText type="text" />
+    <textarea rows="5" cols="30" pInputTextarea placeholder="Description" formControlName="description"></textarea>
+
+    <div class="btn-group">
+      <p-button [disabled]="addForm.invalid" type="submit" label="Add"></p-button>
+      <p-button styleClass="p-button-secondary" label="Cancel" (onClick)="cancel()"></p-button>
+    </div>
+  </form>
+</p-dialog>

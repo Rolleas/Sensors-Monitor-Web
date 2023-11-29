@@ -1,0 +1,9 @@
+<div class="center-screen">
+  <p-card header="Enter login and password for access">
+    <form class="form" (ngSubmit)="submit()" [formGroup]="loginForm">
+      <input class="input" placeholder="Login" formControlName="login" pInputText />
+      <input class="input" placeholder="Password" formControlName="password" pInputText type="password" />
+      <p-button type="submit" label="Login"></p-button>
+    </form>
+  </p-card>
+</div>

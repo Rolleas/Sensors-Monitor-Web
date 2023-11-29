@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  .input {
+    margin-bottom: 20px;
+  }
+
+  ::ng-deep .p-button {
+    width: 100%;
+  }
+}
